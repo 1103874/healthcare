@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Health Check
+{% endblock %}
+
+
+{% block content %}
+    <div class="flex-xl-fill m-5 my-3 col-6">
+        <h5 class="my-3 border-bottom pb-3"><b>※ 건강 체크리스트</b></h5>
+        {#{{ form.as_p }} 태그는 form 엘리먼트와 입력 항목을 자동으로 생성해주지만 부트스트랩을 적용할 수 없기에 forms.py에서 적용한다.#}
+        <form method="post" class="post-form my-3">
+            {% csrf_token %}
+            {{ form.as_p }}
+{#            <p>1. 전일 과음 또는 음주 상태로 업무 수행이 어려운가요?</p>#}
+{#            {{ form.check1 }}#}
+{#            <p>2. 맥박이 빠르고 조급함이 느껴지나요?</p>#}
+{#            {{ form.check2 }}#}
+{#            <p>3. 머리가 무겁거나 어지러움이 있나요?</p>#}
+{#            {{ form.check3 }}#}
+{#            <p>4. 머리가 무겁거나 어지러움이 있나요?</p>#}
+{#            {{ form.check4 }}#}
+
+
+            <div class="border-top">
+            </div>
+            <button type="submit" class="btn btn-primary my-3">등록</button>
+            <input class="btn btn-primary" type="submit" value="뒤로가기" onclick="window.history.go(-1); return false;" />
+
+        </form>
+    </div>
+{% endblock %}

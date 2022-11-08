@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Health Check
+{% endblock %}
+
+{% block content %}
+    <div class="flex-xl-fill m-1 my-5">
+        <h2 style="text-align: center;"><b><u>구성원 일일 보건관리 기록부</u></b></h2>
+    </div>
+    <div class="flex-xl-fill m-5 my-3">
+        <h5><b>■ 공 사 명 : </b></h5>
+        <h5><b>■ 작 업 명 : </b></h5>
+        <h5><b>■ 검사일시 : </b></h5>
+        <h5><b>■ 검 토 자 : </b></h5>
+    </div>
+
+    <div class="flex-xl-fill m-5 my-3">
+        <table class="table table-bordered text-center">
+            <thead class="align-middle" style="background-color: whitesmoke;">
+                <tr>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">성명</th>
+                    <th colspan="6">검사 항목</th>
+                    <th colspan="3">담당자 확인</th>
+                </tr>
+                <tr>
+                    <th style="font-size:0.7rem; width:10rem">1. 전일 과음 또는 음주 상태로 업무 수행이 어려운가요?</th>
+                    <th style="font-size:0.7rem; width:10rem">2. 맥박이 빠르고 조급함이 느껴지나요?</th>
+                    <th style="font-size:0.7rem; width:10rem">3. 머리가 무겁거나 어지러움이 있나요?</th>
+                    <th style="font-size:0.7rem; width:10rem">4. 충분한 수면을 하셨나요?<br>(최소 5시간 이상)</th>
+                    <th style="font-size:0.7rem; width:10rem">5. 열이 있거나 질병이 있나요?</th>
+                    <th style="font-size:0.7rem; width:10rem">6. 오늘 업무수행에 문제가 없는 적절한 컨디션인가요?</th>
+                    <th style="font-size:0.9rem">판정</th>
+                    <th style="font-size:0.9rem">사유</th>
+                    <th style="font-size:0.9rem">전달사항</th>
+                </tr>
+            </thead>
+
+            <tbody class="align-middle">
+            {% for qi in qs %}
+                <tr style="font-size: 13px">
+                    <td style="width: 1rem">{{ forloop.counter }}</td>
+                    <td style="width: 8rem">{{ qi.user }}</td>
+                    <td>{{ qi.check1 }}</td>
+                    <td>{{ qi.check2 }}</td>
+                    <td>{{ qi.check3 }}</td>
+                    <td>{{ qi.check4 }}</td>
+                    <td>{{ qi.check5 }}</td>
+                    <td>{{ qi.check6 }}</td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'App:create' %}"
+       class="btn btn-primary">작성하기</a>
+    </div>
+
+{#<div>#}
+{#<!-- 페이징 처리 시작 -->#}
+{#    <ul class="pagination justify-content-center">#}
+{#<!-- 이전 페이지 -->#}
+{#        {% if qs.has_previous %}#}
+{#            <li class="page-item">#}
+{#                <a class="page-link"#}
+{#                   href="?page={{ qs.previous_page_number }}">이전</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#<!-- 페이지 리스트 -->#}
+{#        {% for page_number in qs.paginator.page_range %}#}
+{#            {% if page_number >= qs.number|add:-4 and page_number <= qs.number|add:4 %}#}
+{#                {% if page_number == qs.number %}#}
+{#                    <li class="page-item active" aria-current="page">#}
+{#                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#<!-- 다음 페이지 -->#}
+{#        {% if qs.has_next %}#}
+{#            <li class="page-item">#}
+{#                <a class="page-link" href="?page={{ qs.next_page_number }}">다음</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</div>#}
+{% endblock %}
